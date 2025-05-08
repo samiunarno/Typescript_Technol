@@ -10,37 +10,15 @@
   const str = "Hello World";
   const upperstr = formatString(str, true);
   const lowestr = formatString(str, false);
+  
 
-  console.log(str);
-  console.log(upperstr);
-  console.log(lowestr);
 
-  interface book {
-    title: string;
-    rating: number;
-  }
-
-  const books: book[] = [
-    {
-      title: "Book A",
-      rating: 4.5,
-    },
-    {
-      title: "Book B",
-      rating: 3.2,
-    },
-    {
-      title: "Book C",
-      rating: 5.0,
-    },
-  ];
   function filterBooksByRating(item: book[]): book[] {
     return item.filter((item) => item.rating >= 4);
   }
 
-  const res = filterBooksByRating(books);
+  const res = filterBooksByRating(book);
 
-  console.log(res);
 
   function concatenateArrays<T>(...arrays: T[][]): T[] {
     return arrays.reduce((acc, arrays) => {
@@ -49,6 +27,8 @@
   }
   console.log(concatenateArrays([1, 2], [3, 4], [5]));
   console.log(concatenateArrays(["a", "b"], ["c"]));
+
+  
 
   class Vehicle {
     private make: string;
@@ -83,23 +63,9 @@
   myCar.getInfo();
   myCar.getModel();
 
-  console.log(myCar.getInfo());
-  console.log(myCar.getModel());
 
-  type outputst = {
-    st: string;
-  };
 
-  type outputnum = {
-    num: number;
-  };
 
-  const output: outputst = {
-    st: "Hello",
-  };
-  const output2: outputnum = {
-    num: 10,
-  };
 
   function processValue(value: string | number): any {
     if (typeof value === "string") {
@@ -109,19 +75,7 @@
     }
   }
 
-  console.log(processValue(output.st));
-  console.log(processValue(output2.num));
 
-  interface Product {
-    name: string;
-    price: number;
-  }
-
-  const products = [
-    { name: "Pen", price: 10 },
-    { name: "Notebook", price: 25 },
-    { name: "Bag", price: 50 },
-  ];
 
   function getMostExpensiveProduct(prod: Product[]): any {
     if (prod.length === 0) {
@@ -138,7 +92,7 @@
   }
   const moreexpensive = getMostExpensiveProduct(products);
 
-  console.log(moreexpensive);
+
 
   enum days {
     Monday,
@@ -170,8 +124,7 @@
 
   const dayType = getDayType(days.Monday);
   const dayType2 = getDayType(days.Friday);
-  console.log("Today is :", dayType);
-  console.log("Today is : ", dayType2);
+
 
   async function squarenumber(num: number): Promise<number> {
     return new Promise((res, rej) => {

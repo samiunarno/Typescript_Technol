@@ -1,59 +1,70 @@
-What are some differences between interfaces and types in TypeScript?
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg font-sans text-gray-800 leading-relaxed">
+  <h1 class="text-4xl font-bold text-blue-600 mb-4">📘 Interfaces vs Types in TypeScript</h1>
+  <p class="text-lg mb-6">TypeScript offers two powerful tools to define custom types: <strong>Interfaces</strong> and <strong>Type Aliases</strong>. Although they often seem interchangeable, there are key differences that can impact your code design and flexibility.</p>
 
-Typescript offers two types of custom types Interface & Type Alieas . They seem like interchangeable there are some key difference on these types
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">1️⃣ Declaration Merging</h2>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    interface Person {<br>
+    &nbsp;&nbsp;name: string;<br>
+    &nbsp;&nbsp;age: number;<br>
+    }
+  </div>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    type Person = {<br>
+    &nbsp;&nbsp;name: string;<br>
+    &nbsp;&nbsp;age: number;<br>
+    }
+  </div>
+  <p>Interfaces support <strong>declaration merging</strong>, meaning you can define the same interface in multiple places and TypeScript will merge them. Type aliases do not support this.</p>
 
-1.Declaration Merging
-2.Extends Interaction
-3.Compatibility of Object Types
-4.Performance
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">2️⃣ Extending Interfaces</h2>
+  <p>Interfaces use the <code>extends</code> keyword to inherit properties, which is intuitive for object structures.</p>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    interface Animal {<br>
+    &nbsp;&nbsp;name: string;<br>
+    }<br><br>
+    interface Dog extends Animal {<br>
+    &nbsp;&nbsp;breed: string;<br>
+    }
+  </div>
 
-Declaration Merging :
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">3️⃣ Type Composition</h2>
+  <p>Type aliases offer more powerful composition using <code>&</code> (intersection) and <code>|</code> (union).</p>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    type Admin = Person & {<br>
+    &nbsp;&nbsp;privileges: string[];<br>
+    };<br><br>
+    type Result = Success | Failure;
+  </div>
 
-Interface Person {
-name : string;
-age : number;
-}
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">4️⃣ Other Key Concepts</h2>
+  <ul class="list-disc list-inside space-y-1 mb-4">
+    <li><strong>any:</strong> Skips all type checks — avoid overusing.</li>
+    <li><strong>unknown:</strong> Type-safe alternative to <code>any</code>.</li>
+    <li><strong>never:</strong> Represents impossible states — great for exhaustive checks.</li>
+    <li><strong>Enums:</strong> Named constants (numeric or string-based).</li>
+  </ul>
 
-type Person = {
-name : string;
-age : number;
-}
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">🎯 Type Inference in TypeScript</h2>
+  <p>TypeScript smartly infers types to reduce boilerplate and prevent bugs:</p>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    let name = "Alice"; // inferred as string
+  </div>
+  <div class="bg-gray-100 p-4 rounded text-sm font-mono mb-4">
+    function add(a: number, b: number) {<br>
+    &nbsp;&nbsp;return a + b;<br>
+    } // inferred return type: number
+  </div>
+  <p>This feature helps keep your code concise while still maintaining type safety.</p>
 
-Extends Interation :
+  <h2 class="text-2xl font-semibold text-blue-500 mt-6 mb-2">📌 Why It Matters</h2>
+  <ul class="list-disc list-inside space-y-2">
+    <li>Write clean, maintainable code without declaring every type.</li>
+    <li>Fewer bugs thanks to compile-time checks and smart type tracking.</li>
+    <li>Confidence during refactors — TypeScript will guide you.</li>
+  </ul>
 
-Interfaces use the extends key for inheritance making the perfect match between the types and more explicit
-
-interface Animal {
-name: string;
-}
-
-interface Dog extends Animal {
-breed: string;
-}
-
-Type Composition :
-There are two type of Interaction is : & and | Operators these type of operator gives more flexibility for complex type operations.
-
-type Admin = Person & {
-privileges: string[];
-};
-
-type Result = Success | Failure;
-
-TypeScript includes special types for specific scenarios. The "any" type completely bypasses type checking but should be used sparingly. The "unknown" type serves as a type-safe alternative to "any", requiring explicit type checking before use. The "never" type represents values that should never occur, useful for exhaustive type checking and impossible state representations.
-Enums allow developers to define sets of named constants. Numeric enums auto-increment values when unspecified and support reverse mapping. String enums provide more readable values that are self-documenting and better for serialization. Both variants improve code clarity over plain numeric or string values.
-TypeScript's type inference system automatically determines types when not explicitly annotated. It works for variable initialization, function return types, and contextual patterns. While powerful, explicit types remain valuable for public APIs and complex scenarios where inference might be too specific or unclear.
-
-
-Understanding Type Inference in TypeScript and Why It Matters?
-
-When you're developing with TypeScript, one of its most powerful features quietly works behind the scenes: type inference. It helps you write cleaner, more reliable code without constantly declaring types everywhere. But what exactly is type inference, and why is it so helpful?Type inference is TypeScript’s ability to automatically determine the type of a variable or expression without you having to explicitly tell it.
-
-let name = "Alice"; 
-
-Here, we didn’t declare name: string—TypeScript looked at the value ("Alice") and figured out the type on its own.
-
-function add(a: number, b: number) {
-  return a + b; 
-}
-Because both inputs are numbers, TypeScript infers the return type of the function without needing a separate annotation.Even without writing types everywhere, TypeScript still knows the types behind the scenes, preventing many common bugs.If you change part of your code, TypeScript can keep track of types and show you where updates are needed, even when types aren't explicitly declared.TypeScript's type inference is like a smart assistant it watches your code and helps keep it safe and clean without demanding too much input. By understanding and trusting type inference, you can write more concise, readable, and maintainable code while still enjoying the benefits of strong typing.
+  <div class="mt-8 text-sm text-gray-500 border-t pt-4">
+    Written by <strong>Samiun Arno</strong> | <a href="mailto:samiunarnouk@gmail.com" class="text-blue-500 underline">samiunarnouk@gmail.com</a> | <a href="https://github.com/samiunarno" class="text-blue-500 underline">GitHub</a>
+  </div>
+</div>
